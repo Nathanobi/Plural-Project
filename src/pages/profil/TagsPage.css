@@ -1,0 +1,200 @@
+.tags-page__header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.tags-page__eyebrow {
+  margin: 0;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.tags-page__title {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.tags-page__count {
+  font-size: 0.95rem;
+  font-weight: 400;
+  color: var(--text-secondary);
+}
+
+.tags-page__error {
+  padding: 10px 12px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  color: var(--error);
+  border: 1px solid var(--error);
+}
+
+/* Barre de recherche / filtres, toujours en haut de la zone de contenu */
+.tags-page__toolbar {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 12px;
+  margin-bottom: 12px;
+  border-radius: 8px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+}
+
+.tags-page__search {
+  padding: 8px 10px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--bg);
+  color: var(--text);
+  font: inherit;
+}
+
+.tags-page__filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+}
+
+.tags-page__chip {
+  padding: 4px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+.tags-page__chip--include {
+  border-color: var(--success);
+  color: var(--success);
+}
+
+.tags-page__chip--exclude {
+  border-color: var(--error);
+  color: var(--error);
+  text-decoration: line-through;
+}
+
+.tags-page__reset {
+  border: none;
+  background: none;
+  color: var(--accent);
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+.tags-page__empty {
+  padding: 24px 0;
+  text-align: center;
+  color: var(--text-secondary);
+}
+
+/* Liste : lignes séparées par une bordure fine, badges en fin de ligne */
+.tags-page__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.tags-page__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 4px;
+  border-bottom: 1px solid var(--border);
+}
+
+.tags-page__main {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.tags-page__name {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.95rem;
+}
+
+.tags-page__parent {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.tags-page__desc {
+  margin: 0;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.tags-page__badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.tags-page__actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.tags-page__confirm {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+/* Boutons (partagés avec TagForm) */
+.tag-btn {
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: 1px solid transparent;
+  font: inherit;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.tag-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.tag-btn--primary {
+  background: var(--accent);
+  color: #ffffff;
+}
+
+.tag-btn--secondary {
+  background: transparent;
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.tag-btn--danger {
+  background: var(--error);
+  color: #ffffff;
+}
+
+.tag-btn--icon {
+  padding: 6px 9px;
+  background: transparent;
+  border-color: var(--border);
+  color: var(--text);
+}
+
+@media (max-width: 640px) {
+  .tags-page__row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

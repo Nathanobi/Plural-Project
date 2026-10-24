@@ -1,0 +1,9 @@
+.tag-color-dot {
+  --tag-color: #999999;
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--tag-color);
+  flex-shrink: 0;
+}
