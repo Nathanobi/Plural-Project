@@ -1,0 +1,119 @@
+/* Reset léger + typographie + classes utilitaires réutilisables par
+   toutes les pages (design.md §Typographie et §Composants récurrents). */
+
+* ,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-family);
+  background: var(--bg);
+  color: var(--text);
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+button {
+  font-family: inherit;
+}
+
+/* ---- Typographie (design.md §Typographie) ---- */
+
+.ps-page-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.ps-section-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.ps-body {
+  font-size: 0.95rem;
+  color: var(--text);
+}
+
+.ps-muted {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.ps-eyebrow {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  letter-spacing: 0.04em;
+}
+
+/* ---- Cartes (design.md §Composants récurrents) ---- */
+
+.ps-card {
+  background: var(--bg-secondary);
+  border-radius: var(--radius-card);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+  padding: 16px;
+}
+
+/* ---- Badges de statut ---- */
+
+.ps-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 10px;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.ps-badge-success {
+  background: color-mix(in srgb, var(--success) 18%, transparent);
+  color: var(--success);
+}
+
+.ps-badge-warning {
+  background: color-mix(in srgb, var(--warning) 18%, transparent);
+  color: var(--warning);
+}
+
+.ps-badge-error {
+  background: color-mix(in srgb, var(--error) 18%, transparent);
+  color: var(--error);
+}
+
+/* ---- Boutons ---- */
+
+.ps-button-primary {
+  background: var(--accent);
+  color: #ffffff;
+  border: none;
+  border-radius: var(--radius-button);
+  padding: 8px 16px;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+
+.ps-button-secondary {
+  background: transparent;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  border-radius: var(--radius-button);
+  padding: 8px 16px;
+  font-size: 0.95rem;
+  cursor: pointer;
+}

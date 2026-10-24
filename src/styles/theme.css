@@ -1,0 +1,33 @@
+/* Variables de couleurs — design.md §Palette de couleurs.
+   Mode clair/sombre automatique via prefers-color-scheme (design.md §Principes
+   généraux : "suit le mode système, pas de bouton de bascule nécessaire"). */
+
+:root {
+  --bg: #fafafa;
+  --bg-secondary: #ffffff;
+  --text: #1a1a1a;
+  --text-secondary: #6b6b6b;
+  --accent: #4f6bed;
+  --success: #2e9e5b;
+  --warning: #d97706;
+  --error: #dc2626;
+  --border: #e2e2e2;
+
+  --font-family: -apple-system, "Segoe UI", Roboto, sans-serif;
+  --radius-card: 8px;
+  --radius-button: 6px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #121212;
+    --bg-secondary: #1e1e1e;
+    --text: #ededed;
+    --text-secondary: #a0a0a0;
+    --accent: #7c93f5;
+    --success: #4fcb82;
+    --warning: #f0a93a;
+    --error: #f27272;
+    --border: #2c2c2c;
+  }
+}
