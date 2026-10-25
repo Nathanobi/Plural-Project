@@ -12,20 +12,19 @@
   border-radius: 999px;
   border: 1px solid var(--border);
   background: transparent;
-  color: var(--text);
+  color: var(--text-secondary);
   font: inherit;
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   cursor: pointer;
 }
 
-.tag-picker__chip.is-selected {
+.tag-picker__chip.is-on {
   border-color: var(--accent);
-  background: color-mix(in srgb, var(--accent) 14%, transparent);
   color: var(--accent);
 }
 
 .tag-picker__empty {
   margin: 0;
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   color: var(--text-secondary);
 }
