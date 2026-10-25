@@ -121,3 +121,15 @@
   justify-content: flex-end;
   gap: 8px;
 }
+
+.image-form__figure--round img {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.image-form__field > .image-form__hint {
+  font-size: 0.8rem;
+  color: var(--warning);
+}

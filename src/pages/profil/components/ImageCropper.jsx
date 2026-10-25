@@ -1,7 +1,6 @@
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { RotateCw } from "lucide-react";
 import {
-  RATIOS,
   MAX_OUTPUT,
   loadImage,
   rotateToCanvas,
@@ -14,38 +13,33 @@ import "./ImageCropper.css";
 const MIN_SIZE = 0.05;
 const clamp = (v, min, max) => Math.min(max, Math.max(min, v));
 
-// Fractions (0..1) -> pixels du canvas pivoté.
+// Fractions (0..1) -> pixels du canvas pivoté, toujours un carré exact.
 function toCrop(box, canvas) {
   const W = canvas.width;
   const H = canvas.height;
   const x = Math.round(box.x * W);
   const y = Math.round(box.y * H);
-  return {
-    x,
-    y,
-    width: Math.max(1, Math.min(W - x, Math.round(box.w * W))),
-    height: Math.max(1, Math.min(H - y, Math.round(box.h * H))),
-  };
+  const size = Math.max(1, Math.min(W - x, H - y, Math.round(box.w * W)));
+  return { x, y, width: size, height: size };
 }
 
-// Recadreur plein écran : "Avant" (image + zone) et "Après" (aperçu en direct).
-// `initial` = ancien objet recadrage (restauré seulement si la taille source correspond).
+// Recadreur plein écran, toujours en 1:1 (image carrée pour avatar).
+// "Avant" = image + zone ; "Après" = aperçu rond + aperçu à taille Discord.
 export default function ImageCropper({ src, initial, onApply, onCancel }) {
   const [img, setImg] = useState(null);
   const [error, setError] = useState("");
   const [rotation, setRotation] = useState(initial?.rotation ?? 0);
-  const [ratioKey, setRatioKey] = useState(initial?.ratio ?? "1:1");
   const [box, setBox] = useState(null);
   const [rotatedUrl, setRotatedUrl] = useState("");
 
   const canvasRef = useRef(null);
   const stageRef = useRef(null);
   const boxRef = useRef(null);
-  const previewRef = useRef(null);
+  const largeRef = useRef(null);
+  const smallRef = useRef(null);
   const dragRef = useRef(null);
   const restoredRef = useRef(false);
 
-  const ratio = RATIOS.find((r) => r.key === ratioKey)?.value ?? null;
   const ready = Boolean(rotatedUrl && box);
 
   useEffect(() => {
@@ -85,7 +79,7 @@ export default function ImageCropper({ src, initial, onApply, onCancel }) {
       setBox(
         matches
           ? { x: c.x / W, y: c.y / H, w: c.width / W, h: c.height / H }
-          : fitBox(ratio, W, H)
+          : fitBox(1, W, H)
       );
       setRotatedUrl(url);
     }, "image/png");
@@ -106,23 +100,18 @@ export default function ImageCropper({ src, initial, onApply, onCancel }) {
     el.style.setProperty("--box-h", `${box.h * 100}%`);
   }, [box, rotatedUrl]);
 
-  // Aperçu "Après" en direct.
+  // Aperçus "Après" en direct (grand rond + taille Discord).
   useEffect(() => {
     const canvas = canvasRef.current;
-    const preview = previewRef.current;
-    if (!canvas || !preview || !box) return;
-    const out = drawCrop(canvas, toCrop(box, canvas), 240);
-    preview.width = out.width;
-    preview.height = out.height;
-    preview.getContext("2d").drawImage(out, 0, 0);
+    if (!canvas || !box) return;
+    const out = drawCrop(canvas, toCrop(box, canvas), 256);
+    for (const preview of [largeRef.current, smallRef.current]) {
+      if (!preview) continue;
+      preview.width = out.width;
+      preview.height = out.height;
+      preview.getContext("2d").drawImage(out, 0, 0);
+    }
   }, [box, rotatedUrl]);
-
-  function changeRatio(key) {
-    setRatioKey(key);
-    const value = RATIOS.find((r) => r.key === key)?.value ?? null;
-    const canvas = canvasRef.current;
-    if (canvas) setBox(fitBox(value, canvas.width, canvas.height));
-  }
 
   function startDrag(e, mode) {
     if (!box) return;
@@ -151,14 +140,11 @@ export default function ImageCropper({ src, initial, onApply, onCancel }) {
       setBox({ x: clamp(x + dx, 0, 1 - w), y: clamp(y + dy, 0, 1 - h), w, h });
       return;
     }
-    if (ratio) {
-      const k = canvas.width / (ratio * canvas.height); // h = w * k
-      const maxW = Math.min(1 - x, (1 - y) / k);
-      const nw = clamp(w + dx, MIN_SIZE, maxW);
-      setBox({ x, y, w: nw, h: nw * k });
-    } else {
-      setBox({ x, y, w: clamp(w + dx, MIN_SIZE, 1 - x), h: clamp(h + dy, MIN_SIZE, 1 - y) });
-    }
+    // Redimensionnement : carré, donc h = w * (W / H) en fractions.
+    const k = canvas.width / canvas.height;
+    const maxW = Math.min(1 - x, (1 - y) / k);
+    const nw = clamp(w + dx, MIN_SIZE, maxW);
+    setBox({ x, y, w: nw, h: nw * k });
   }
 
   function endDrag() {
@@ -180,7 +166,7 @@ export default function ImageCropper({ src, initial, onApply, onCancel }) {
       previewUrl: URL.createObjectURL(blob),
       recadrage: {
         version: 1,
-        ratio: ratioKey,
+        ratio: "1:1",
         rotation,
         crop,
         source: { width: img.naturalWidth, height: img.naturalHeight },
@@ -197,16 +183,7 @@ export default function ImageCropper({ src, initial, onApply, onCancel }) {
         {error && <p className="image-cropper__error">{error}</p>}
 
         <div className="image-cropper__controls">
-          {RATIOS.map((r) => (
-            <button
-              key={r.key}
-              type="button"
-              className={`image-cropper__chip${r.key === ratioKey ? " is-on" : ""}`}
-              onClick={() => changeRatio(r.key)}
-            >
-              {r.label}
-            </button>
-          ))}
+          <span className="image-cropper__hint">Format carré (1:1)</span>
           <button
             type="button"
             className="image-cropper__chip"
@@ -242,9 +219,18 @@ export default function ImageCropper({ src, initial, onApply, onCancel }) {
                 </div>
               </div>
             </div>
+
             <div className="image-cropper__pane">
               <span className="image-cropper__label">Après</span>
-              <canvas className="image-cropper__preview" ref={previewRef} />
+              <canvas
+                className="image-cropper__preview image-cropper__preview--large"
+                ref={largeRef}
+              />
+              <span className="image-cropper__label">Taille dans un message Discord</span>
+              <canvas
+                className="image-cropper__preview image-cropper__preview--small"
+                ref={smallRef}
+              />
             </div>
           </div>
         )}

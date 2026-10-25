@@ -1,0 +1,51 @@
+.prenom-combobox {
+  position: relative;
+}
+
+.prenom-combobox input {
+  width: 100%;
+}
+
+.prenom-combobox__list {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 20;
+  margin: 4px 0 0;
+  padding: 4px;
+  list-style: none;
+  max-height: 240px;
+  overflow-y: auto;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.prenom-combobox__option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 7px 10px;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  color: var(--text);
+  cursor: pointer;
+}
+
+.prenom-combobox__option:hover,
+.prenom-combobox__option.is-active {
+  background: var(--bg);
+}
+
+.prenom-combobox__name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.prenom-combobox__option .ps-badge {
+  flex-shrink: 0;
+}

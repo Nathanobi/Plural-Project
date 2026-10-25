@@ -43,6 +43,7 @@
 .image-cropper__controls {
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
   gap: 6px;
 }
 
@@ -58,11 +59,6 @@
   font: inherit;
   font-size: 0.8rem;
   cursor: pointer;
-}
-
-.image-cropper__chip.is-on {
-  border-color: var(--accent);
-  color: var(--accent);
 }
 
 .image-cropper__panes {
@@ -122,12 +118,24 @@
   cursor: nwse-resize;
 }
 
+/* Aperçus : ronds, taille fixée en CSS (indépendante de la taille du canvas) */
 .image-cropper__preview {
-  max-width: 100%;
-  max-height: 240px;
+  display: block;
+  flex-shrink: 0;
   border: 1px solid var(--border);
-  border-radius: 6px;
+  border-radius: 50%;
   background: var(--bg);
+}
+
+.image-cropper__preview.image-cropper__preview--large {
+  width: 128px;
+  height: 128px;
+}
+
+/* Taille d'un avatar dans un message Discord */
+.image-cropper__preview.image-cropper__preview--small {
+  width: 40px;
+  height: 40px;
 }
 
 .image-cropper__actions {

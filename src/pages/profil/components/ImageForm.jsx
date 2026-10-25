@@ -1,18 +1,27 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Upload } from "lucide-react";
 import TagPicker from "./TagPicker";
+import PrenomCombobox from "./PrenomCombobox";
 import ImageCropper from "./ImageCropper";
 import "./ImageForm.css";
 
-const NEW = "__new__";
-
 // Formulaire d'ajout / édition d'une image.
 // `image` absent = création. Le parent gère l'enregistrement (upload, prénom, base).
-export default function ImageForm({ image, prenoms, tags, saving, error, onSubmit, onCancel }) {
+export default function ImageForm({
+  image,
+  images,
+  prenoms,
+  tags,
+  saving,
+  error,
+  onSubmit,
+  onCancel,
+}) {
   const [source, setSource] = useState(null); // { blob, url, name, fromHosted? }
   const [cropped, setCropped] = useState(null); // { blob, previewUrl, recadrage }
-  const [prenomId, setPrenomId] = useState(image?.prenom_id ?? "");
-  const [newNom, setNewNom] = useState("");
+  const [prenomInput, setPrenomInput] = useState(
+    () => prenoms.find((p) => p.id === image?.prenom_id)?.nom ?? ""
+  );
   const [tagIds, setTagIds] = useState(image?.tag_ids ?? []);
   const [pinterest, setPinterest] = useState(image?.url_pinterest_source ?? "");
   const [showCropper, setShowCropper] = useState(false);
@@ -25,6 +34,16 @@ export default function ImageForm({ image, prenoms, tags, saving, error, onSubmi
     const urls = urlsRef.current;
     return () => urls.forEach((u) => URL.revokeObjectURL(u));
   }, []);
+
+  // Nombre d'images par prénom (sans compter l'image en cours d'édition).
+  const imageCounts = useMemo(() => {
+    const counts = {};
+    for (const img of images) {
+      if (img.id === image?.id || !img.prenom_id) continue;
+      counts[img.prenom_id] = (counts[img.prenom_id] || 0) + 1;
+    }
+    return counts;
+  }, [images, image]);
 
   function makeUrl(blob) {
     const url = URL.createObjectURL(blob);
@@ -93,6 +112,12 @@ export default function ImageForm({ image, prenoms, tags, saving, error, onSubmi
     setShowCropper(false);
   }
 
+  // Prénom saisi : correspond à un prénom existant, sinon sera créé.
+  const typedPrenom = prenomInput.trim();
+  const matchedPrenom = typedPrenom
+    ? prenoms.find((p) => p.nom.trim().toLowerCase() === typedPrenom.toLowerCase())
+    : null;
+
   function handleSubmit(e) {
     e.preventDefault();
     setLocalError("");
@@ -101,17 +126,12 @@ export default function ImageForm({ image, prenoms, tags, saving, error, onSubmi
     if (!file && !image?.url_hebergee && !pin) {
       return setLocalError("Ajoute une image (dépôt ou parcourir) ou un lien Pinterest.");
     }
-    let newPrenomNom = null;
-    if (prenomId === NEW) {
-      newPrenomNom = newNom.trim();
-      if (!newPrenomNom) return setLocalError("Saisis le nouveau prénom.");
-    }
     onSubmit({
       file,
       filename: source?.name || "image.jpg",
       recadrage: cropped?.recadrage ?? null,
-      prenomId: prenomId === NEW ? null : prenomId || null,
-      newPrenomNom,
+      prenomId: matchedPrenom?.id ?? null,
+      newPrenomNom: typedPrenom && !matchedPrenom ? typedPrenom : null,
       tagIds,
       pinterest: pin || null,
     });
@@ -119,7 +139,6 @@ export default function ImageForm({ image, prenoms, tags, saving, error, onSubmi
 
   const beforeUrl = source?.url ?? image?.url_hebergee ?? null;
   const displayUrl = cropped?.previewUrl ?? beforeUrl;
-  const sortedPrenoms = [...prenoms].sort((a, b) => a.nom.localeCompare(b.nom, "fr"));
   const canCrop = Boolean(source || image?.url_hebergee);
 
   return (
@@ -160,7 +179,7 @@ export default function ImageForm({ image, prenoms, tags, saving, error, onSubmi
               <figcaption>Avant</figcaption>
             </figure>
           )}
-          <figure className="image-form__figure">
+          <figure className={`image-form__figure${cropped ? " image-form__figure--round" : ""}`}>
             <img src={displayUrl} alt="Aperçu" />
             <figcaption>{cropped ? "Après" : "Aperçu"}</figcaption>
           </figure>
@@ -196,25 +215,21 @@ export default function ImageForm({ image, prenoms, tags, saving, error, onSubmi
         </div>
       </label>
 
-      <label className="image-form__field">
-        <span>Prénom associé</span>
-        <select value={prenomId} onChange={(e) => setPrenomId(e.target.value)}>
-          <option value="">Aucun</option>
-          {sortedPrenoms.map((p) => (
-            <option key={p.id} value={p.id}>
-              {p.nom}
-            </option>
-          ))}
-          <option value={NEW}>+ Nouveau prénom…</option>
-        </select>
-      </label>
-
-      {prenomId === NEW && (
-        <label className="image-form__field">
-          <span>Nouveau prénom</span>
-          <input type="text" value={newNom} onChange={(e) => setNewNom(e.target.value)} autoFocus />
-        </label>
-      )}
+      <div className="image-form__field">
+        <span>Prénom associé (optionnel)</span>
+        <PrenomCombobox
+          prenoms={prenoms}
+          imageCounts={imageCounts}
+          value={prenomInput}
+          onChange={setPrenomInput}
+          placeholder="Écris pour chercher ou créer un prénom"
+        />
+        {typedPrenom && !matchedPrenom && (
+          <span className="image-form__hint">
+            « {typedPrenom} » n'existe pas encore : il sera créé à l'enregistrement.
+          </span>
+        )}
+      </div>
 
       <div className="image-form__field">
         <span>Tags</span>
