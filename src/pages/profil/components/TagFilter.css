@@ -1,0 +1,81 @@
+.tag-filter {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+}
+
+.tag-filter__chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text-secondary);
+  font: inherit;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+.tag-filter__chip:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.tag-filter__chip--include {
+  border-color: var(--success);
+  color: var(--success);
+}
+
+.tag-filter__chip--exclude {
+  border-color: var(--error);
+  color: var(--error);
+  text-decoration: line-through;
+}
+
+.tag-filter__state {
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-block;
+}
+
+/* Bascule OU / ET entre les tags inclus */
+.tag-filter__mode {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: 8px;
+}
+
+.tag-filter__mode-label {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  margin-right: 2px;
+}
+
+.tag-filter__mode-btn {
+  padding: 3px 10px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text-secondary);
+  font: inherit;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+.tag-filter__mode-btn:first-of-type {
+  border-radius: 6px 0 0 6px;
+}
+
+.tag-filter__mode-btn:last-of-type {
+  border-radius: 0 6px 6px 0;
+  margin-left: -1px;
+}
+
+.tag-filter__mode-btn.is-active {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: #ffffff;
+}
