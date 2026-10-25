@@ -1,0 +1,72 @@
+.connexion-card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.connexion-card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.connexion-card__field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.connexion-card__input-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.connexion-card__input {
+  flex: 1;
+  min-width: 0;
+  padding: 8px 10px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--bg);
+  color: var(--text);
+  font: inherit;
+  font-family: monospace;
+}
+
+.connexion-card__input:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+.connexion-card__eye {
+  display: flex;
+  padding: 8px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: transparent;
+  color: var(--text);
+  cursor: pointer;
+}
+
+.connexion-card__detail {
+  margin: 0;
+}
+
+.connexion-card__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.connexion-card__btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* Badge neutre (pas défini dans global.css) */
+.connexion-badge--neutral {
+  background: color-mix(in srgb, var(--text-secondary) 18%, transparent);
+  color: var(--text-secondary);
+}
