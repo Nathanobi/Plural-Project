@@ -1,0 +1,55 @@
+.proxy-sim {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.proxy-sim__input {
+  padding: 8px 10px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--bg);
+  color: var(--text);
+  font: inherit;
+  font-family: monospace;
+  resize: vertical;
+}
+
+.proxy-sim__result {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg);
+}
+
+.proxy-sim__line {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.proxy-sim__line code,
+.proxy-sim__others code {
+  font-family: monospace;
+  color: var(--accent);
+}
+
+.proxy-sim__sent {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  overflow-wrap: anywhere;
+  white-space: pre-line;
+}
+
+.proxy-sim__others ul {
+  margin: 4px 0 0;
+  padding-left: 18px;
+  font-size: 0.85rem;
+}

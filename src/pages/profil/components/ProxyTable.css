@@ -1,0 +1,91 @@
+.proxy-table__bar {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
+.proxy-table__chip {
+  padding: 4px 12px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--text-secondary);
+  font: inherit;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+.proxy-table__chip.is-active {
+  border-color: var(--warning);
+  color: var(--warning);
+}
+
+.proxy-table__empty {
+  padding: 24px 0;
+  text-align: center;
+  color: var(--text-secondary);
+}
+
+.proxy-table__table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+.proxy-table__table th {
+  padding: 8px 4px;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.8rem;
+  font-weight: 500;
+  text-align: left;
+  color: var(--text-secondary);
+}
+
+.proxy-table__table td {
+  padding: 10px 4px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: middle;
+}
+
+.proxy-table__name {
+  font-weight: 600;
+}
+
+.proxy-table__codes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.proxy-table__code {
+  padding: 2px 8px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-family: monospace;
+  font-size: 0.85rem;
+  color: var(--accent);
+}
+
+.proxy-table__code--warning {
+  border-color: var(--warning);
+}
+
+.proxy-table__code--error {
+  border-color: var(--error);
+}
+
+.proxy-table__cell-actions {
+  text-align: right;
+  white-space: nowrap;
+}
+
+.proxy-table__add {
+  padding: 4px 10px;
+  border: 1px solid var(--accent);
+  border-radius: 6px;
+  background: transparent;
+  color: var(--accent);
+  font: inherit;
+  font-size: 0.85rem;
+  cursor: pointer;
+}

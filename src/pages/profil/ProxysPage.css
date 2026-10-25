@@ -1,0 +1,164 @@
+.proxys-page__header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.proxys-page__header-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.proxys-page__eyebrow {
+  margin: 0;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.proxys-page__title {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.proxys-page__count {
+  font-size: 0.95rem;
+  font-weight: 400;
+  color: var(--text-secondary);
+}
+
+.proxys-page__error {
+  padding: 10px 12px;
+  margin: 0 0 12px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  color: var(--error);
+  border: 1px solid var(--error);
+}
+
+.proxys-page__notice {
+  padding: 10px 12px;
+  margin: 0 0 12px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  color: var(--success);
+  border: 1px solid var(--success);
+}
+
+/* Onglets de vue */
+.proxys-page__tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+.proxys-page__tab {
+  padding: 8px 14px;
+  border: none;
+  border-bottom: 2px solid transparent;
+  background: none;
+  color: var(--text-secondary);
+  font: inherit;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+
+.proxys-page__tab.is-active {
+  border-bottom-color: var(--accent);
+  color: var(--accent);
+  font-weight: 600;
+}
+
+/* Barre de recherche / filtres, toujours en haut de la zone de contenu */
+.proxys-page__toolbar {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 12px;
+  margin-bottom: 12px;
+  border-radius: 8px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+}
+
+.proxys-page__toolbar-row {
+  display: flex;
+  gap: 8px;
+}
+
+.proxys-page__search {
+  flex: 1;
+  min-width: 0;
+  padding: 8px 10px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--bg);
+  color: var(--text);
+  font: inherit;
+}
+
+.proxys-page__sort {
+  padding: 8px 10px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--bg);
+  color: var(--text);
+  font: inherit;
+}
+
+.proxys-page__filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+}
+
+.proxys-page__chip {
+  padding: 4px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text-secondary);
+  font: inherit;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+.proxys-page__chip.is-active {
+  border-color: var(--error);
+  color: var(--error);
+}
+
+.proxys-page__reset {
+  border: none;
+  background: none;
+  color: var(--accent);
+  font: inherit;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+.proxys-page__empty {
+  padding: 24px 0;
+  text-align: center;
+  color: var(--text-secondary);
+}
+
+/* Liste : lignes séparées par une bordure fine */
+.proxys-page__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+@media (max-width: 640px) {
+  .proxys-page__toolbar-row {
+    flex-direction: column;
+  }
+}
