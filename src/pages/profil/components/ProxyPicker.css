@@ -1,0 +1,27 @@
+.proxy-picker {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.proxy-picker__chip {
+  padding: 4px 12px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--text-secondary);
+  font-family: monospace;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+.proxy-picker__chip.is-on {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.proxy-picker__hint {
+  margin: 0;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}

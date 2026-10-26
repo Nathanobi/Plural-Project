@@ -1,0 +1,96 @@
+.profil-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.profil-form__title {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.profil-form__section {
+  margin: 8px 0 0;
+  padding-top: 8px;
+  border-top: 1px solid var(--border);
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.profil-form__field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 0.95rem;
+}
+
+.profil-form__field > span {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.profil-form__field > .profil-form__hint {
+  color: var(--warning);
+}
+
+.profil-form__field input[type="text"],
+.profil-form__field input[type="date"],
+.profil-form__field textarea,
+.profil-form__field select {
+  padding: 8px 10px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--bg);
+  color: var(--text);
+  font: inherit;
+}
+
+.profil-form__color {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.profil-form__color input[type="color"] {
+  width: 40px;
+  height: 34px;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: transparent;
+  cursor: pointer;
+}
+
+.profil-form__color input[type="text"] {
+  width: 110px;
+  font-family: monospace;
+}
+
+.profil-form__link-btn {
+  border: none;
+  background: none;
+  padding: 0;
+  color: var(--accent);
+  font: inherit;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+.profil-form__error {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--error);
+}
+
+.profil-form__actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.profil-form__actions button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

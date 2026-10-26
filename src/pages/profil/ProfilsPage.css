@@ -1,0 +1,131 @@
+.profils-page__header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.profils-page__eyebrow {
+  margin: 0;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.profils-page__title {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.profils-page__count {
+  font-size: 0.95rem;
+  font-weight: 400;
+  color: var(--text-secondary);
+}
+
+.profils-page__error {
+  padding: 10px 12px;
+  margin: 0 0 12px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  color: var(--error);
+  border: 1px solid var(--error);
+}
+
+.profils-page__notice {
+  padding: 10px 12px;
+  margin: 0 0 12px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  color: var(--success);
+  border: 1px solid var(--success);
+}
+
+/* Barre de recherche / filtres, toujours en haut de la zone de contenu */
+.profils-page__toolbar {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 12px;
+  margin-bottom: 12px;
+  border-radius: 8px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+}
+
+.profils-page__toolbar-row {
+  display: flex;
+  gap: 8px;
+}
+
+.profils-page__search {
+  flex: 1;
+  min-width: 0;
+  padding: 8px 10px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--bg);
+  color: var(--text);
+  font: inherit;
+}
+
+.profils-page__select {
+  padding: 8px 10px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--bg);
+  color: var(--text);
+  font: inherit;
+}
+
+.profils-page__filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+}
+
+.profils-page__chip {
+  padding: 4px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text-secondary);
+  font: inherit;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+.profils-page__chip.is-active {
+  border-color: var(--warning);
+  color: var(--warning);
+}
+
+.profils-page__reset {
+  border: none;
+  background: none;
+  color: var(--accent);
+  font: inherit;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+.profils-page__empty {
+  padding: 24px 0;
+  text-align: center;
+  color: var(--text-secondary);
+}
+
+/* Liste : lignes séparées par une bordure fine */
+.profils-page__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+@media (max-width: 640px) {
+  .profils-page__toolbar-row {
+    flex-direction: column;
+  }
+}
